@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:state_managment/model/time_info.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -11,12 +13,8 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     Timer.periodic(Duration(seconds: 1), (t) {
-      setState(() {
-        if (inital > 0) {
-          print('------Starting from stract-----');
-          inital--;
-        }
-      });
+      var timer = Provider.of<TimerInfo>(context, listen: false);
+      timer.updateReamingTime();
     });
     super.initState();
   }
@@ -39,9 +37,13 @@ class _HomeState extends State<Home> {
             SizedBox(
               height: 10,
             ),
-            Text(
-              '$inital',
-              style: TextStyle(fontSize: 32.0),
+            Consumer<TimerInfo>(
+              builder: (context, data, child) {
+                return Text(
+                  data.remainingTime.toString(),
+                  style: TextStyle(fontSize: 32.0),
+                );
+              },
             )
           ],
         ),
