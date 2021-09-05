@@ -5,22 +5,43 @@ class CounterHome extends StatelessWidget {
   final counterBloc = Counter();
   @override
   Widget build(BuildContext context) {
-    int count = 0;
     return Scaffold(
       appBar: AppBar(
         title: Text("Counter App"),
         centerTitle: true,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          count++;
-          counterBloc.counterIncreament.add(count);
-        },
-        child: Icon(Icons.add),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              counterBloc.eventSink.add(CounterEvent.increment);
+            },
+            child: Icon(Icons.add),
+          ),
+          SizedBox(
+            width: 20,
+          ),
+          FloatingActionButton(
+            onPressed: () {
+              counterBloc.eventSink.add(CounterEvent.decrement);
+            },
+            child: Icon(Icons.minimize_outlined),
+          ),
+          SizedBox(
+            width: 20,
+          ),
+          FloatingActionButton(
+            onPressed: () {
+              counterBloc.eventSink.add(CounterEvent.reset);
+            },
+            child: Icon(Icons.restore),
+          ),
+        ],
       ),
       body: Center(
         child: StreamBuilder<int>(
-            stream: counterBloc.showCounterIncrement,
+            stream: counterBloc.counterStream,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Text(
