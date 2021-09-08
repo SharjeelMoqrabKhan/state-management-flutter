@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:state_managment/counter_bloc/counter_bloc.dart';
 
-class CounterHome extends StatelessWidget {
+class CounterHome extends StatefulWidget {
+  @override
+  _CounterHomeState createState() => _CounterHomeState();
+}
+
+class _CounterHomeState extends State<CounterHome> {
   final counterBloc = Counter();
+
+  @override
+  void dispose(){
+    counterBloc.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

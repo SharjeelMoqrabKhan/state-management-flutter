@@ -32,4 +32,9 @@ class Counter {
       counterSink.add(count);
     });
   }
+
+  void dispose(){
+    _counterStreamController.close();
+    _eventConrtoller.close();
+  }
 }
