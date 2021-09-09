@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:state_managment/counter_home/counter_home.dart';
+import 'package:state_managment/view/news_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
-      home: CounterHome(),
+      home: NewsPage(),
     );
   }
 }
